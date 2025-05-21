@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mikrotik Script Generator</title>
+    <!-- CSS BASE -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- Boxicons CSS -->
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <!-- Animation Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  </head>
+  <body class="bg-[#181A20] min-h-screen">
+    <!-- Section: Background split -->
+    <div
+      class="relative w-full h-[180px] md:h-[200px] bg-cover bg-center"
+      style="background-image: url('./assets/img/image_header.jpg')"
+    >
+      <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+
+    <!-- Card Info nổi -->
+    <div class="relative z-10 flex justify-center">
+      <div
+        class="-mt-32 w-full max-w-5xl rounded-3xl bg-[#23262F] shadow-2xl flex flex-col items-center px-10 py-10 gap-10 border border-gray-800"
+      >
+        <!-- Info -->
+        <div class="flex-1 flex flex-col items-center text-center">
+          <div class="flex flex-col items-center gap-8">
+            <div class="mb-4">
+              <h2
+                class="w-full text-3xl md:text-4xl font-bold text-white flex items-center gap-2 justify-center text-center"
+              >
+                Minitool tạo script Mikrotik
+              </h2>
+              <div class="text-gray-400 text-lg mt-1">
+                Miễn phí, dễ sử dụng, dễ thiết lập, an toàn, bảo mật và 1 số ứng dụng đi kèm trên website
+              </div>
+              <div class="flex gap-4 mt-3 justify-center">
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition"
+                  ><i class="bx bxl-facebook text-2xl"></i
+                ></a>
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition"
+                  ><i class="bx bxl-twitter text-2xl"></i
+                ></a>
+                <a href="#" class="text-gray-400 hover:text-blue-500 transition"
+                  ><i class="bx bxl-instagram text-2xl"></i
+                ></a>
+              </div>
+              <div class="mt-2">
+                <a
+                  href="https://www.facebook.com/bui.huy.547727/"
+                  class="text-gray-400 hover:text-blue-500 transition inline-flex items-center gap-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Bùi Quốc Huy
+                  <img src="assets/img/bluetick.png" alt="Tick xanh" class="w-5 h-5 align-middle -mt+5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main layout: Sidebar + Content -->
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 mt-10 px-4 mb-10">
+      <!-- Sidebar -->
+      <aside class="w-full md:w-1/5 flex flex-col gap-2 md:gap-4 mb-4 md:mb-0">
+        <button
+          id="pppoeBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-gradient-to-b from-blue-500 to-blue-700 text-white rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-plug text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">PPPOE</span>
+        </button>
+        <button
+          id="aguardBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-shield-quarter text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">AGUARD</span>
+        </button>
+        <button
+          id="firewallBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-shield text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">FIREWALL</span>
+        </button>
+        <button
+          id="openportBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-log-in-circle text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">OPEN PORT</span>
+        </button>
+        <button
+          id="ddnsBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-globe text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">DDNS</span>
+        </button>
+        <button
+          id="vpnBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-lock-alt text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">VPN</span>
+        </button>
+        <button
+          id="ticketBtn"
+          type="button"
+          class="flex flex-col items-center justify-center bg-[#23262F] text-gray-300 rounded-2xl shadow-lg py-3 px-1 md:py-5 md:px-2 w-full md:w-auto md:h-24 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
+        >
+          <i class="bx bx-receipt text-2xl md:text-3xl"></i>
+          <span class="mt-1 md:mt-2 font-bold text-xs tracking-widest">CHECK PHẠT NGUỘI</span>
+        </button>
+      </aside>
+      <!-- Content -->
+      <section
+        id="mainContent"
+        class="flex-1 bg-[#23262F] rounded-3xl shadow-lg p-4 md:p-10 transition-all duration-500 flex items-center justify-center min-h-[300px]"
+      >
+        <div id="form1" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            PPPOE <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <div>
+              <label for="pppoe-provider" class="block text-gray-300 mb-1 flex items-center gap-2">
+                Chọn nhà mạng
+                <div class="group relative">
+                  <i
+                    class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                  ></i>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                    <div
+                      class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                        <div>
+                          <p class="font-medium text-white mb-1">Thông tin nhà mạng</p>
+                          <p class="text-gray-400 text-xs leading-relaxed">
+                            Chọn nhà mạng cung cấp dịch vụ internet của bạn:
+                          </p>
+                          <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                            <li>Viettel: Dịch vụ internet cáp quang</li>
+                            <li>VNPT: Dịch vụ internet cáp quang</li>
+                            <li>FPT: Dịch vụ internet cáp quang</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+              </label>
+              <select
+                id="pppoe-provider"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="" disabled selected>Chọn nhà mạng</option>
+                <option value="viettel">Viettel</option>
+                <option value="vnpt">VNPT</option>
+                <option value="fpt">FPT</option>
+              </select>
+            </div>
+            <div>
+              <label for="pppoe-interface" class="block text-gray-300 mb-1 flex items-center gap-2">
+                Interface
+                <div class="group relative">
+                  <i
+                    class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                  ></i>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                    <div
+                      class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                        <div>
+                          <p class="font-medium text-white mb-1">Thông tin Interface</p>
+                          <p class="text-gray-400 text-xs leading-relaxed">Tên interface PPPOE:</p>
+                          <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                            <li>Mặc định: pppoe-out1</li>
+                            <li>Được sử dụng trong script</li>
+                            <li>Có thể thay đổi nếu cần</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+              </label>
+              <input
+                id="pppoe-interface"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Nhập tên interface"
+                value="pppoe-out1"
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="pppoe-username" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Username PPPOE
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin Username PPPOE</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                              Nhập username được cung cấp bởi nhà mạng.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-username"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập username PPPOE"
+                />
+              </div>
+              <div>
+                <label for="pppoe-password" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Password PPPOE
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin Password PPPOE</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                              Nhập mật khẩu được cung cấp bởi nhà mạng
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-password"
+                  type="password"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập password PPPOE"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="pppoe-wan" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Tên cổng WAN
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin cổng WAN</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                              Cổng kết nối với modem của nhà mạng:
+                            </p>
+                            <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                              <li>Mặc định: ether1</li>
+                              <li>Thường là cổng đầu tiên</li>
+                              <li>Kiểm tra trên router</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-wan"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập tên cổng WAN"
+                  value="ether1"
+                />
+              </div>
+              <div>
+                <label for="pppoe-bridge" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Tên Bridge
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin Bridge</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">Bridge kết nối các cổng LAN:</p>
+                            <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                              <li>Mặc định: bridgeLAN</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-bridge"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập tên bridge"
+                  value="bridgeLAN"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="pppoe-ports" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Số lượng port sử dụng
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin số lượng port</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                              Số lượng cổng LAN cần sử dụng:
+                            </p>
+                            <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                              <li>Tối thiểu: 1 port</li>
+                              <li>Ví dụ có 10 cổng LAN sử dụng 1 thì nhập 9</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-ports"
+                  type="number"
+                  min="1"
+                  max="24"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập số lượng port"
+                />
+              </div>
+              <div>
+                <label for="pppoe-gateway" class="block text-gray-300 mb-1 flex items-center gap-2">
+                  Địa chỉ Gateway
+                  <div class="group relative">
+                    <i
+                      class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                    ></i>
+                    <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                      <div
+                        class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                      >
+                        <div class="flex items-start gap-2">
+                          <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                          <div>
+                            <p class="font-medium text-white mb-1">Thông tin Gateway</p>
+                            <p class="text-gray-400 text-xs leading-relaxed">
+                              Địa chỉ gateway của mạng nội bộ:
+                            </p>
+                            <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                              <li>Mặc định: 192.168.1.1/24</li>
+                              <li>Định dạng: IP/subnet</li>
+                              <li>Ví dụ: 192.168.1.1/24</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                      ></div>
+                    </div>
+                  </div>
+                </label>
+                <input
+                  id="pppoe-gateway"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập địa chỉ gateway"
+                  value="192.168.1.1/24"
+                />
+              </div>
+            </div>
+            <div id="fpt-options" class="hidden space-y-4">
+              <div class="bg-[#181A20] rounded-lg p-4 border border-gray-700">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                      <i class="bx bx-network-chart text-blue-500 text-xl"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Clone MAC Address</h3>
+                      <p class="text-gray-400 text-sm">Sao chép địa chỉ MAC từ thiết bị khác</p>
+                    </div>
+                  </div>
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="pppoe-clone-mac" class="sr-only peer" />
+                    <div
+                      class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"
+                    ></div>
+                  </label>
+                </div>
+                <div id="mac-address-input" class="hidden mt-4">
+                  <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <i class="bx bx-chip text-gray-400"></i>
+                    </div>
+                    <input
+                      id="pppoe-mac"
+                      type="text"
+                      class="w-full pl-10 rounded-lg bg-[#23262F] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Nhập MAC Address (VD: 00:11:22:33:44:55)"
+                    />
+                  </div>
+                  <p class="mt-2 text-sm text-gray-400">Định dạng: XX:XX:XX:XX:XX:XX hoặc XXXX.XXXX.XXXX</p>
+                </div>
+              </div>
+            </div>
+            <button
+              id="pppoe-gen"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Tạo script
+            </button>
+            <div id="pppoe-script-box" class="hidden mt-4">
+              <div
+                class="rounded-t-lg bg-[#181A24] flex items-center justify-between px-4 py-2 border-b border-blue-500"
+              >
+                <span class="text-xs font-semibold text-blue-300 uppercase tracking-widest font-mono"
+                  >script</span
+                >
+                <button
+                  id="pppoe-copy"
+                  type="button"
+                  class="bg-[#23262F] text-gray-300 hover:text-blue-400 px-3 py-1 rounded transition text-xs flex items-center gap-1 shadow-sm border border-[#23262F] hover:border-blue-500"
+                >
+                  <i class="bx bx-copy"></i> Copy code
+                </button>
+              </div>
+              <div class="bg-[#181A20] rounded-b-lg p-4 overflow-x-auto custom-scrollbar">
+                <pre
+                  class="text-blue-400 text-sm leading-relaxed font-mono"
+                ><code id="pppoe-script"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form2" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            AGUARD <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <div>
+              <label for="aguard-ip" class="block text-gray-300 mb-1 flex items-center gap-2">
+                IP Adguard
+                <div class="group relative">
+                  <i
+                    class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                  ></i>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                    <div
+                      class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                        <div>
+                          <p class="font-medium text-white mb-1">Thông tin IP Adguard</p>
+                          <p class="text-gray-400 text-xs leading-relaxed">
+                            Nhập địa chỉ IP của máy chủ Adguard:
+                          </p>
+                          <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                            <li>Ví dụ: 192.168.2.100</li>
+                            <li>IP nội bộ của máy chủ</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+              </label>
+              <input
+                id="aguard-ip"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="VD: 192.168.1.100"
+              />
+            </div>
+            <div>
+              <label for="aguard-bridge" class="block text-gray-300 mb-1 flex items-center gap-2">
+                Tên Bridge
+                <div class="group relative">
+                  <i
+                    class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                  ></i>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                    <div
+                      class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                        <div>
+                          <p class="font-medium text-white mb-1">Thông tin Bridge</p>
+                          <p class="text-gray-400 text-xs leading-relaxed">Tên bridge kết nối với Adguard:</p>
+                          <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                            <li>Mặc định: dockers / để trống cũng là dockers</li>
+                            <li>Bridge chứa container Adguard</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+              </label>
+              <input
+                id="aguard-bridge"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Nhập tên bridge"
+                value="dockers"
+              />
+            </div>
+            <button
+              id="aguard-gen"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Tạo script
+            </button>
+            <div id="aguard-script-box" class="hidden mt-4">
+              <div
+                class="rounded-t-lg bg-[#181A24] flex items-center justify-between px-4 py-2 border-b border-blue-500"
+              >
+                <span class="text-xs font-semibold text-blue-300 uppercase tracking-widest font-mono"
+                  >script</span
+                >
+                <button
+                  id="aguard-copy"
+                  type="button"
+                  class="bg-[#23262F] text-gray-300 hover:text-blue-400 px-3 py-1 rounded transition text-xs flex items-center gap-1 shadow-sm border border-[#23262F] hover:border-blue-500"
+                >
+                  <i class="bx bx-copy"></i> Copy code
+                </button>
+              </div>
+              <div class="bg-[#181A20] rounded-b-lg p-4 overflow-x-auto custom-scrollbar">
+                <pre
+                  class="text-blue-400 text-sm leading-relaxed font-mono"
+                ><code id="aguard-script"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form3" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            FIREWALL <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <p class="text-gray-300 mb-6 text-base leading-relaxed">
+              Script bảo mật Firewall Mikrotik với các rule chống DDoS, port scanning và brute force attacks.
+            </p>
+            <button
+              id="firewall-gen"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Tạo script bảo mật
+            </button>
+            <div id="firewall-script-box" class="hidden mt-4">
+              <div
+                class="rounded-t-lg bg-[#181A24] flex items-center justify-between px-4 py-2 border-b border-blue-500"
+              >
+                <span class="text-xs font-semibold text-blue-300 uppercase tracking-widest font-mono"
+                  >script</span
+                >
+                <button
+                  id="firewall-copy"
+                  type="button"
+                  class="bg-[#23262F] text-gray-300 hover:text-blue-400 px-3 py-1 rounded transition text-xs flex items-center gap-1 shadow-sm border border-[#23262F] hover:border-blue-500"
+                >
+                  <i class="bx bx-copy"></i> Copy code
+                </button>
+              </div>
+              <div class="bg-[#181A20] rounded-b-lg p-4 overflow-x-auto custom-scrollbar">
+                <pre
+                  class="text-blue-400 text-sm leading-relaxed font-mono"
+                ><code id="firewall-script"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form4" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            OPEN PORT <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <div>
+              <label for="openport-ip" class="block text-gray-300 mb-1">Nhập IP cần mở port</label>
+              <input
+                id="openport-ip"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="VD: 192.168.88.10"
+              />
+            </div>
+            <div>
+              <label for="openport-port" class="block text-gray-300 mb-1">Nhập port muốn mở</label>
+              <input
+                id="openport-port"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="VD: 3389"
+              />
+            </div>
+            <button
+              id="openport-gen"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Tạo script
+            </button>
+            <div id="openport-script-box" class="hidden mt-4">
+              <div
+                class="rounded-t-lg bg-[#181A24] flex items-center justify-between px-4 py-2 border-b border-blue-500"
+              >
+                <span class="text-xs font-semibold text-blue-300 uppercase tracking-widest font-mono"
+                  >script</span
+                >
+                <button
+                  id="openport-copy"
+                  type="button"
+                  class="bg-[#23262F] text-gray-300 hover:text-blue-400 px-3 py-1 rounded transition text-xs flex items-center gap-1 shadow-sm border border-[#23262F] hover:border-blue-500"
+                >
+                  <i class="bx bx-copy"></i> Copy code
+                </button>
+              </div>
+              <div class="bg-[#181A20] rounded-b-lg p-4 overflow-x-auto custom-scrollbar">
+                <pre
+                  class="text-blue-400 text-sm leading-relaxed font-mono"
+                ><code id="openport-script"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form5" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            DDNS <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <div>
+              <label for="ddns-provider" class="block text-gray-300 mb-1">Chọn nhà cung cấp</label>
+              <select
+                id="ddns-provider"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              >
+                <option value="" disabled selected>Chọn nhà cung cấp</option>
+                <option value="cloudflare">Cloudflare</option>
+                <option value="dynu">Dynu</option>
+              </select>
+            </div>
+            <div>
+              <label for="ddns-interface" class="block text-gray-300 mb-1">Interface</label>
+              <input
+                id="ddns-interface"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Nhập interface (mặc định: pppoe-out1)"
+                value="pppoe-out1"
+              />
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="ddns-zoneid" class="block text-gray-300 mb-1">Zone ID</label>
+                <input
+                  id="ddns-zoneid"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="VD: ed69f8e03b1e50a4ed6840"
+                />
+              </div>
+              <div>
+                <label for="ddns-accountid" class="block text-gray-300 mb-1">Account ID</label>
+                <input
+                  id="ddns-accountid"
+                  type="text"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập Account ID"
+                />
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="ddns-email" class="block text-gray-300 mb-1">Cloudflare Email</label>
+                <input
+                  id="ddns-email"
+                  type="email"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập email Cloudflare"
+                />
+              </div>
+              <div>
+                <label for="ddns-apikey" class="block text-gray-300 mb-1">Global API Key</label>
+                <input
+                  id="ddns-apikey"
+                  type="password"
+                  class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Nhập Global API Key"
+                />
+              </div>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <label class="block text-gray-300">DNS Records</label>
+                <button
+                  id="add-dns-record"
+                  type="button"
+                  class="text-blue-500 hover:text-blue-400 transition-colors"
+                >
+                  <i class="bx bx-plus-circle text-2xl"></i>
+                </button>
+              </div>
+              <div id="dns-records-container" class="space-y-3">
+                <div class="dns-record-item grid grid-cols-[1fr_1fr_auto] gap-4 items-end">
+                  <div>
+                    <label class="block text-gray-300 mb-1">Record ID</label>
+                    <input
+                      type="text"
+                      class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Nhập Record ID"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-gray-300 mb-1">Domain</label>
+                    <input
+                      type="text"
+                      class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="VD: example.com"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    class="delete-record text-red-500 hover:text-red-400 transition-colors p-2"
+                    title="Xóa record"
+                  >
+                    <i class="bx bx-x-circle text-xl"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <button
+              id="ddns-gen"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Tạo script
+            </button>
+            <div id="ddns-script-box" class="hidden mt-4">
+              <div
+                class="rounded-t-lg bg-[#181A24] flex items-center justify-between px-4 py-2 border-b border-blue-500"
+              >
+                <span class="text-xs font-semibold text-blue-300 uppercase tracking-widest font-mono"
+                  >script</span
+                >
+                <button
+                  id="ddns-copy"
+                  type="button"
+                  class="bg-[#23262F] text-gray-300 hover:text-blue-400 px-3 py-1 rounded transition text-xs flex items-center gap-1 shadow-sm border border-[#23262F] hover:border-blue-500"
+                >
+                  <i class="bx bx-copy"></i> Copy code
+                </button>
+              </div>
+              <div class="bg-[#181A20] rounded-b-lg p-4 overflow-x-auto custom-scrollbar">
+                <pre
+                  class="text-blue-400 text-sm leading-relaxed font-mono"
+                ><code id="ddns-script"></code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form6" class="hidden w-full max-w-lg mx-auto">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            CHECK PHẠT NGUỘI <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <div class="space-y-4 w-full">
+            <div>
+              <label for="ticket-number" class="block text-gray-300 mb-1 flex items-center gap-2">
+                Biển số xe
+                <div class="group relative">
+                  <i
+                    class="bx bx-help-circle text-gray-400 hover:text-blue-500 transition-colors cursor-help"
+                  ></i>
+                  <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block">
+                    <div
+                      class="bg-[#181A20] text-gray-300 text-sm rounded-lg p-3 shadow-lg border border-gray-700 w-64"
+                    >
+                      <div class="flex items-start gap-2">
+                        <i class="bx bx-info-circle text-blue-500 mt-0.5"></i>
+                        <div>
+                          <p class="font-medium text-white mb-1">Thông tin phạt nguội</p>
+                          <p class="text-gray-400 text-xs leading-relaxed">Nhập biển số xe cần kiểm tra:</p>
+                          <ul class="list-disc list-inside text-gray-400 text-xs mt-1 space-y-1">
+                            <li>Định dạng: 30A123456</li>
+                            <li>Ví dụ: 30A123456</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-2 h-2 bg-[#181A20] border-r border-b border-gray-700 rotate-45"
+                    ></div>
+                  </div>
+                </div>
+              </label>
+              <input
+                id="ticket-number"
+                type="text"
+                class="w-full rounded-lg bg-[#181A20] border border-gray-700 text-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Nhập biển số xe"
+              />
+            </div>
+            <button
+              id="ticket-check"
+              type="button"
+              class="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white font-bold py-2 rounded-lg shadow hover:from-blue-600 hover:to-blue-800 transition"
+            >
+              Kiểm tra
+            </button>
+            <div id="violation-summary" class="mb-6"></div>
+            <div id="ticket-result" class="hidden mt-4">
+              <div class="bg-[#181A20] rounded-lg p-4 border border-gray-700">
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                      <i class="bx bx-info-circle text-blue-500 text-xl"></i>
+                    </div>
+                    <div>
+                      <h3 class="text-white font-medium">Kết quả kiểm tra</h3>
+                      <p class="text-gray-400 text-sm">Thông tin phạt nguội</p>
+                    </div>
+                  </div>
+                </div>
+                <div id="ticket-details" class="mt-4 space-y-2">
+                  <!-- Result will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="form7" class="hidden">
+          <h1 class="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 flex items-center gap-3">
+            VPN <span class="w-6 md:w-8 h-1 bg-blue-500 rounded"></span>
+          </h1>
+          <p class="text-gray-300 mb-6 md:mb-10 text-base md:text-lg leading-relaxed">
+            Form cấu hình VPN hoặc thông tin liên quan đến VPN sẽ hiển thị ở đây.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <!-- SCRIPT RUN HERE -->
+    <script src="assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/checkPhatNguoi.js"></script>
+    <script src="assets/js/whatisthis.js"></script>
+  </body>
+</html>
