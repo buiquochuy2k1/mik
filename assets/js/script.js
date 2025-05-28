@@ -376,7 +376,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (provider === 'cloudflare') {
         // Base script template
         script = `:delay 5
-/ip cloud force-update
 /ip firewall address-list remove [/ip firewall address-list find list=WAN]
 :foreach tda in=[/ip address find where interface~"${interface}"] do={ :local tdaaddress [/ip address get $tda address]; /ip firewall address-list add address=$tdaaddress list=WAN; }
 
